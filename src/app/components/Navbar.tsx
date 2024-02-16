@@ -2,7 +2,7 @@
 import { isAuth } from "@/Utills/Auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -13,14 +13,12 @@ const Navbar = () => {
     isAuth().removeToken();
     setTimeout(() => {
       window.location.reload();
-     }, 200);
+    }, 200);
     router.push("/login");
   };
 
   useEffect(() => {
-    return () => {
-      setIsAuthenticated(token);
-    };
+    setIsAuthenticated(token);
   }, [token]);
 
   return (
@@ -31,16 +29,16 @@ const Navbar = () => {
             Todo app
           </Link>
           <div className="">
-            {
-              isAuthenticated ? (<button
-              onClick={handleLogout}
-              className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Logout
-              </button>) : (
-                  <div className=""></div>
-              )
-            }
+            {isAuthenticated ? (
+              <button
+                onClick={handleLogout}
+                className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Logout
+              </button>
+            ) : (
+              <div className=""></div>
+            )}
           </div>
         </div>
       </nav>

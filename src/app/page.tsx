@@ -13,35 +13,31 @@ export interface Todo {
 }
 const Home = (props: any) => {
   const [todos, setTodos] = useState([] as Todo[]);
-  const limit = props.searchParams.limit || 15;
-  const skip = props.searchParams.skip || 0;
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const fetchTodos = async (limit: number, skip: number) => {
+    setLoading(true);
+    const response = await fetch(
+      `https://dummyjson.com/todos?limit=${limit}&skip=${skip}`
+    );
+    const data = await response.json();
+    setTodos(data.todos);
+    setTotal(data.total);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchTodos = async () => {
-      setLoading(true);
-      const response = await fetch(
-        `https://dummyjson.com/todos?limit=${limit}&skip=${skip}`
-      );
-      const data = await response.json();
-
-      setTodos(data.todos);
-      setTotal(data.total);
-      setLoading(false);
-    };
-
-    return () => {
-      fetchTodos();
-    };
-  }, [skip, limit]);
-
+    const limit = props.searchParams.limit || 15;
+    const skip = props.searchParams.skip || 0;
+    fetchTodos(limit, skip);
+  }, [props.searchParams.skip, props.searchParams.limit]);
 
   useLayoutEffect(() => {
     if (!isAuth().getToken) {
       redirect("/login");
     }
-  })
+  });
 
   return (
     <main className="m-0 p-0">
@@ -73,7 +69,11 @@ const Home = (props: any) => {
         )}
         {todos.length > 0 ? (
           <div className="w-full flex flex-row justify-center py-4">
-            <Paginator limit={limit} total={total} skip={skip} />
+            <Paginator
+              limit={props.searchParams.limit || 15}
+              total={total}
+              skip={props.searchParams.skip || 0}
+            />
           </div>
         ) : (
           <div className=""></div>

@@ -26,10 +26,10 @@ const Login = () => {
         setLoading(false);
         alert("Login successful");
         isAuth().setToken(data.token);
-        setTimeout(() => {        
+        setTimeout(() => {
           window.location.reload();
         }, 200);
-        router.push("/")
+        router.push("/");
       })
       .catch((e) => {
         setLoading(false);
