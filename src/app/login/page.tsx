@@ -27,7 +27,7 @@ const Login = () => {
         alert("Login successful");
         isAuth().setToken(data.token);
         setTimeout(() => {
-          window.location.reload();
+         // window.location.reload();
         }, 200);
         router.push("/");
       })
