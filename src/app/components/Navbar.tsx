@@ -7,19 +7,19 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const token = isAuth().getToken;
   const handleLogout = () => {
     alert("Are you sure to logout?");
     isAuth().removeToken();
     setTimeout(() => {
-     // window.location.reload();
+       window.location.reload();
     }, 200);
     router.push("/login");
   };
 
   useEffect(() => {
+    const token = isAuth().getToken;
     setIsAuthenticated(token);
-  }, [token]);
+  }, []);
 
   return (
     <div className="bg-green-500">
