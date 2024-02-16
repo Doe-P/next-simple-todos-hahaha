@@ -1,25 +1,22 @@
 "use client";
-import { isAuth } from "@/Utills/Auth";
+import { Auth } from "@/Utills/Auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const router = useRouter();
+  const isAuth = Auth.isAuthenticated;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const handleLogout = () => {
     alert("Are you sure to logout?");
-    isAuth().removeToken();
-    setTimeout(() => {
-       window.location.reload();
-    }, 200);
+    Auth.removeToken();
     router.push("/login");
   };
 
   useEffect(() => {
-    const token = isAuth().getToken;
-    setIsAuthenticated(token);
-  }, []);
+    setIsAuthenticated(isAuth);
+  }, [isAuth]);
 
   return (
     <div className="bg-green-500">

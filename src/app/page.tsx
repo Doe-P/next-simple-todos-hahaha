@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
 import Paginator from "./components/Footer";
 import Loading from "./components/Loading";
-import { isAuth } from "@/Utills/Auth";
+import { Auth } from "@/Utills/Auth";
 import { redirect } from "next/navigation";
 export interface Todo {
   userId: number;
@@ -34,7 +34,7 @@ const Home = (props: any) => {
   }, [props.searchParams.skip, props.searchParams.limit]);
 
   useLayoutEffect(() => {
-    if (!isAuth().getToken) {
+    if (!Auth.isAuthenticated) {
       redirect("/login");
     }
   });

@@ -1,19 +1,25 @@
-export const isAuth = () => {
-    const setToken = (token: string): void => {
-        localStorage.setItem("token", token);
-    };
-
-    const getToken = (): boolean => {
-        let token = null
+export class Auth {
+    static setToken(token: string) {
         if (typeof window !== "undefined") {
-            token = localStorage.getItem("token") || null;
+            localStorage.setItem("token", token);
         }
-        return token !== null;
-    };
+    }
 
-    const removeToken = (): void => {
-        localStorage.removeItem("token");
-    };
+    private static getToken() {
+        if (typeof window !== "undefined") {
+            return localStorage.getItem("token") || null;
+        }
+        return null;
+    }
 
-    return { setToken, getToken, removeToken };
-};
+    static isAuthenticated(): boolean {
+        const token = Auth.getToken();
+        return token ? true : false;
+    }
+
+    static removeToken() {
+        if (typeof window !== "undefined") {
+            localStorage.removeItem("token");
+        }
+    }
+}

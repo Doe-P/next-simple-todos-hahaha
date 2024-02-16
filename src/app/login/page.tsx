@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "../components/Loading";
-import { isAuth } from "@/Utills/Auth";
+import { Auth } from "@/Utills/Auth";
 interface User {
   username: string;
   password: string;
@@ -25,10 +25,7 @@ const Login = () => {
       .then((data) => {
         setLoading(false);
         alert("Login successful");
-        isAuth().setToken(data.token);
-        setTimeout(() => {
-          window.location.reload();
-        }, 200);
+        Auth.setToken(data.token);
         router.push("/");
       })
       .catch((e) => {
