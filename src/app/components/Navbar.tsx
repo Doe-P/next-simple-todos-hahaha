@@ -12,7 +12,7 @@ const Navbar = () => {
     alert("Are you sure to logout?");
     isAuth().removeToken();
     setTimeout(() => {
-      window.location.reload();
+     // window.location.reload();
     }, 200);
     router.push("/login");
   };
