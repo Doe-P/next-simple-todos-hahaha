@@ -1,21 +1,20 @@
 "use client";
 import { Auth } from "@/Utills/Auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const router = useRouter();
-  const isAuth = Auth.isAuthenticated;
+  const isAuth = Auth.isAuthenticated();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const handleLogout = () => {
     alert("Are you sure to logout?");
     Auth.removeToken();
-    router.push("/login");
+    window.location.replace("/login");
   };
 
+
   useEffect(() => {
-    setIsAuthenticated(isAuth);
+   setIsAuthenticated(isAuth);
   }, [isAuth]);
 
   return (

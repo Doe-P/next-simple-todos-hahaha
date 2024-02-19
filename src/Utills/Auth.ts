@@ -1,25 +1,21 @@
+import Cookies from "universal-cookie";
+
 export class Auth {
+    static cookies: Cookies = new Cookies();
     static setToken(token: string) {
-        if (typeof window !== "undefined") {
-            localStorage.setItem("token", token);
-        }
+       this.cookies.set("token", token);
     }
 
     private static getToken() {
-        if (typeof window !== "undefined") {
-            return localStorage.getItem("token") || null;
-        }
-        return null;
+        return this.cookies.get("token");
     }
 
     static isAuthenticated(): boolean {
         const token = Auth.getToken();
-        return token ? true : false;
+        return !!token ? true : false;
     }
 
     static removeToken() {
-        if (typeof window !== "undefined") {
-            localStorage.removeItem("token");
-        }
+        this.cookies.remove("token");
     }
 }

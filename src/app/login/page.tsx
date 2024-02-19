@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "../components/Loading";
 import { Auth } from "@/Utills/Auth";
@@ -13,7 +12,6 @@ const Login = () => {
     username: "kminchelle",
     password: "0lelplR",
   } as User);
-  const router = useRouter();
   const handleSubmit = async () => {
     setLoading(true);
     await fetch("https://dummyjson.com/auth/login", {
@@ -26,7 +24,7 @@ const Login = () => {
         setLoading(false);
         alert("Login successful");
         Auth.setToken(data.token);
-        router.push("/");
+        window.location.replace("/");
       })
       .catch((e) => {
         setLoading(false);

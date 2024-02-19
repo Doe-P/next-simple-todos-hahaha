@@ -4,7 +4,6 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import Paginator from "./components/Footer";
 import Loading from "./components/Loading";
 import { Auth } from "@/Utills/Auth";
-import { redirect } from "next/navigation";
 export interface Todo {
   userId: number;
   id: number;
@@ -34,8 +33,8 @@ const Home = (props: any) => {
   }, [props.searchParams.skip, props.searchParams.limit]);
 
   useLayoutEffect(() => {
-    if (!Auth.isAuthenticated) {
-      redirect("/login");
+    if (!Auth.isAuthenticated()) {
+      window.location.replace("/login");
     }
   });
 

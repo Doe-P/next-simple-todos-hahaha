@@ -6,8 +6,7 @@ export default async function TodoId(props: { params: any }) {
   const data = await fetch(url + props.params.id).then((response) =>
     response.json()
   );
-
-
+  
   return (
     <div className="min-h-screen w-full flex justify-center items-center">
       <div className="shadow-md rounded-md p-8">
