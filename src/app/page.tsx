@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useState } from "react";
+import {useEffect, useLayoutEffect, useState } from "react";
 import Paginator from "./components/Footer";
 import Loading from "./components/Loading";
 import { Auth } from "@/Utills/Auth";
