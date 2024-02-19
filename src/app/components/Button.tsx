@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Auth } from "@/Utills/Auth";
+import { useLayoutEffect, useState } from "react";
 
 const ButtonUpdate = ({
   isCompleted,
@@ -28,6 +29,12 @@ const ButtonUpdate = ({
         console.error("Error:", error);
       });
   };
+
+  useLayoutEffect(() => {
+    if (!Auth.isAuthenticated()) {
+      window.location.replace("/login");
+    }
+  });
 
   return (
     <button
