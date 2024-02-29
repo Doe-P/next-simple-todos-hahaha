@@ -4,6 +4,7 @@ import {useEffect, useLayoutEffect, useState } from "react";
 import Paginator from "./components/Footer";
 import Loading from "./components/Loading";
 import { Auth } from "@/Utills/Auth";
+import { APP_API_URL } from "./config/api";
 export interface Todo {
   userId: number;
   id: number;
@@ -14,11 +15,10 @@ const Home = (props: any) => {
   const [todos, setTodos] = useState([] as Todo[]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-
   const fetchTodos = async (limit: number, skip: number) => {
     setLoading(true);
     const response = await fetch(
-      `https://dummyjson.com/todos?limit=${limit}&skip=${skip}`
+      `${APP_API_URL}/todos?limit=${limit}&skip=${skip}`
     );
     const data = await response.json();
     setTodos(data.todos);

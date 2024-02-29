@@ -1,11 +1,8 @@
-
 import ButtonUpdate from "../../components/Button";
 
 export default async function TodoId(props: { params: any }) {
-  const url = "https://jsonplaceholder.typicode.com/todos/";
-  const data = await fetch(url + props.params.id).then((response) =>
-    response.json()
-  );
+  const data = await fetch(`https://dummyjson.com/todos/${props.params.id}`
+  ).then((response) => response.json());
 
   return (
     <div className="min-h-screen w-full flex justify-center items-center">

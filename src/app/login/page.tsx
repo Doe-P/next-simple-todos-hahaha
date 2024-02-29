@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Loading from "../components/Loading";
 import { Auth } from "@/Utills/Auth";
+import { APP_API_URL } from "../config/api";
 interface User {
   username: string;
   password: string;
@@ -14,7 +15,7 @@ const Login = () => {
   } as User);
   const handleSubmit = async () => {
     setLoading(true);
-    await fetch("https://dummyjson.com/auth/login", {
+    await fetch(`${APP_API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
