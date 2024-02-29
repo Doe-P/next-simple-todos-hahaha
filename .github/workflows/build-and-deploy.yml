@@ -9,21 +9,21 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Build and test
-      run: |
-        echo "Building and testing the code"
+      - name: Build and test
+        run: |
+          echo "Building and testing the code"
 
-    - name: Set up .env file
-      run: |
-        touch .env
-        echo "API_KEY=${{ secrets.NEXT_PUBLIC_URL }}" > .env
-        chmod 600 .env
+      - name: Set up .env file
+        run: |
+          touch .env
+          echo "API_KEY=${{ secrets.NEXT_PUBLIC_URL }}" > .env
+          chmod 600 .env
 
-    - name: Build and run docker compose
-      run: |
-        docker-compose up --build -d prod
-        docker image prune -f
+      - name: Build and run docker compose
+        run: |
+          docker-compose up --build -d prod
+          docker image prune -f
     
