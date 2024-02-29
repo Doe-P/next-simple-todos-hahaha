@@ -24,6 +24,6 @@ jobs:
 
     - name: Build and run docker compose
       run: |
-        docker-compose up -d --build -d prod
+        docker-compose up --build -d prod
         docker image prune -f
     
